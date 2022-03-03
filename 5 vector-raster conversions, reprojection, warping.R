@@ -11,6 +11,8 @@ library(units)
 
 # Tutorial de como los objetos stars pueden cambiar su representación en vector o raster.
 
+# Para operaciones con vectores y rasters el paquete stars emplea las funciones disponibles en GDAL y PROJ (las mismas que sf). Esto brinda mayor facilidad a la hora de manejar datos espaciales.
+
 
 # Rasterizing an sf vector object -----------------------------------------
 

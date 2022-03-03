@@ -5,6 +5,10 @@ library(sf)
 library(tidyverse)
 
 # Notes -------------------------------------------------------------
+ 
+# https://r-spatial.github.io/stars/index.html
+
+# RASTER DATA CUBES
 
 # El paquete stars es una nueva versión del paquete raster (y del más reciente paquete terra) que permite trabajar con datos espaciales raster de manera tidy (con un tibble ó data frame de base), por lo que las herramientas del tidyverse son aplicadas.
 # stars (Spatiotemporal Arrays Raster and Vector Data Cubes) provee de la infraestructura para trabajar con data cubes; arreglos de datos con al menos 2 dimensiones espaciales que forman el raster tesseldado. Vector data cubes pueden ser incluidos los cuales son representados por feature geometries (paquete sf).
@@ -12,9 +16,15 @@ library(tidyverse)
 
 # Funciona en base a dimensiones y atributos. Mientras las dimensiones pueden ser del tipo long(x), lat(y), tiempo, bandas o sensores los atributos son aquellos valores que fueron medidos. De esta manera, los atributos son los valores de interés y el cómo estos se arreglen espaciotemporalmente depende de las dimensiones.
 
+# Los data cubes consisten en un arreglo dimensional en la que no sólo existen las referidas a longitud y latitud (espaciales) sino que tambien podemos observar arreglos de datos que presenten una dimensión adicional (imagenes unas sobre otras) en ya sea una dimensión temporal, espectral o sensorial. Higher dimensional cubes (hypercubes) corresponden a un cubo con varias dimensiones (long,lat, temporal, espectral, sensorial, etc) en conjunto.
+
+# Así como existen los arreglos high-dimensional tambien existen los lower-dimensional cubes. Un ejemplo de esto serían las imágenes raster donde solamente existen dos dimensiones; x e y (dimensión espacial).
+
+# VECTOR DATA CUBES
+
+# Los vectores tambien pueden formar data cubes basados en la estructura de los simple features (sf). A diferencia de los raster, los sf no presentan las dimensiones x e y en el plano (longitud y latitud por separado) sino que esta compone una única columna denominada geometries. De esta manera, Los cubos vectoriales están compuestos por los tibbles o data.frames de la manera en que estén conformados donde puede ir agregandose una dimensión temporal al ir creando tibbles conforme exista una variación de tiempo entre alguna otra dimensionalidad posible. En la estructura sf, cada una de las filas corresponde a una geometría de punto o polígono, distinción aplicable a la hora de conformar data cubes con datos vectoriales.
 
 # INTRODUCCIÓN ------------------------------------------------------------
-
 
 # https://r-spatial.github.io/stars/articles/stars1.html
 
