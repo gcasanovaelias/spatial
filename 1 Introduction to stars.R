@@ -62,17 +62,17 @@ plot(x,
 
 # Pasar de dimensión a atributo: La dimensión "band" se transforma a un atributo de los datos, es decir, ahora se presentan las 6 bandas como atributos (aumento con respecto al 1 anterior) mientras que la dimensión pasa de 3 a 2. Esto significa que los valores de las bandas pasan a ser posibles de graficar mientras pero se pierde la posibilidad de ordenar el dataset en el espacio de acuerdo a las 6 dimensiones contenidas anteriormente.
 
-
-x.spl <- split(x = x,
-               drop = "band")
+x.spl <- base::split(x = x,
+                     f = "band")
 
 # Pasar de atributos a dimensión.
-merge(x.spl)
+base::merge(x = x.spl,
+            names = "attributes")
 
 # Los sets de atributos y dimensiones perdieron sus nombres, fueron otorgados ciertos nombres por default por lo que sería apropiado cambiarlos
 
 x.spl %>% 
-  merge() %>% 
+  base::merge() %>% 
   # Attribute name
   setNames("L7_ETMs.tif") %>% 
   # Dimension value

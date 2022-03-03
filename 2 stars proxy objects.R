@@ -116,6 +116,8 @@ plot(x)
 
 # stars proxy object take another approach: upon creation they contain no data at all but only pointers to where the data can be read. DATA IS ONLYE READ WHEN IT IS NEEDED AND ONLY AS MUCH AS NEEDED: if we plot a proxy object the data is read at the resolution of pixels on the screen rather than at the native resolution. For example, if we have a 10000 x 10000 S2 level 1C image...
 
+# stars objects are "in-memory" while the stars_proxy ones are "out-of memory".
+
 p <- read_stars(tif, proxy = T) # only read metadata
 
 class(p)

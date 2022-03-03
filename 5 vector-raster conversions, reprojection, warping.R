@@ -37,16 +37,15 @@ plot(nc.st)
 # The algorith used is the GDAL rasterize and all options of this utility can be passed to st_rasterize. The geometry of the final raster can be controlled by passing a target bounding box and either the raster dimensions nx and ny, or pixel size by the dx and dy parameters.
 
 
-
 # Vectorizing a raster object to an sf object -----------------------------
 
 # Los objetos stars pueden ser convertidos a un sf empleando la función st_as_sf la cual presenta varias opciones.
 
-round(read_stars(system.file("tif/L7_ETMs.tif", package = "stars"))[, 1:50, 1:50, 1:2][[1]]/5)
+# round(read_stars(system.file("tif/L7_ETMs.tif", package = "stars"))[, 1:50, 1:50, 1:2][[1]]/5)
 
 system.file("tif/L7_ETMs.tif", package = "stars") %>% 
   read_stars() %>% 
-  slice(band, index = 1:2,) %>% 
+  slice(band, index = 1:2) %>% 
   slice(x, index = 1:50) %>% 
   slice(y, index = 1:50) %>% 
   mutate(L7_ETMs.tif = round(L7_ETMs.tif/5)) %>% 
@@ -65,7 +64,7 @@ p <- st_polygonize(l)
 
 plot(p)
 
-# EXPORTING TO POINTS: Alternatively, we can simply export all teh pixels as points and get them either as a wode table woth all bands per point and no replicated point geometries...
+# EXPORTING TO POINTS: Alternatively, we can simply export all the pixels as points and get them either as a wode table woth all bands per point and no replicated point geometries...
 
 x %>% st_as_sf(as.points = T, merge = F) %>% plot()
 
@@ -93,7 +92,6 @@ x %>%
 # Podemos observar que las dimensiones x e y se trsnaforman a una dimensión de geometry cuando el raster pasa a ser un sf dentro del objeto stars.
 
 
-
 # Reprojecting a raster ---------------------------------------------------
 
 # Reprojecting a raster is no longer a problem if we have in mind that regular and rectilinear grids are special cases of curvilinear ones. This means we can just recompute new coordinates for every raster cell (generally resulting in a curvilinear cell)
@@ -111,11 +109,12 @@ plot(nc.curv, border = NA, graticule = TRUE)
 # Warping a raster --------------------------------------------------------
 
 # FORMA HABITUAL
-# Warping a raster means creating a nw REGULAR grid in a new CRS based on a (usually regular) grid in another CRS.
+# Warping a raster means creating a new REGULAR grid in a new CRS based on a (usually regular) grid in another CRS.
 
 # First, we create a target grid
 nc %>% 
   st_transform("+proj=laea +lat_0=34 +lon_0=-60") %>% 
+  # Extent
   st_bbox() %>% 
   st_as_stars() -> newgrid
 
