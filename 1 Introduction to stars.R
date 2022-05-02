@@ -3,6 +3,7 @@
 library(stars)
 library(sf)
 library(tidyverse)
+library(cubelyr)
 
 # Notes -------------------------------------------------------------
  
@@ -61,6 +62,18 @@ x <- stars::read_stars(tif)
 {
   # Para este set de datos (y tambien es generalizado) se observa un offset negativo para la dimensión y: esto significa que valores consecutivos del arreglo presentan una tendencia decreciente en los valores de y (los indices de celda incrementan de arriba hacia abajo, en la dirección opuesta al eje Y).
 }
+
+# tbl_cubes?
+# stars are a data structure that is a generalisation of the tbl_cube found in cubelyr which are a way to store data of an array in a compact format. This is the reason why some verbs of the tidverse are applicable to the stars objects (the package was created by Hadley Wickam).
+#* M: Measure (attribute)
+#* D: Dimension
+
+x # stars object
+
+as.tbl_cube(x) # tbl_cube object
+
+# stars object and the tbl_cubes in which they are based on have no limits to the numer of dimensions they can handle
+
 # Gráfico
 plot(x, 
      # Agregar las coordenadas a c/u de los gráficos

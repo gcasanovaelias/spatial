@@ -9,11 +9,11 @@ library(tidyverse)
 
 # https://r-spatial.github.io/stars/articles/stars3.html
 
-# Some of the tidyverse verbs that are available in the package dplyr can be applied to the stars objects.
-
 utils::methods(class = "stars")
 
-# tidy data is based on the distinction between rows and columns where the different verbs let you work with each of this parts of the data frame. For the stars object is helpful to associate dimensions as rows (being possible to apply slice() and filter() based on this dimensions) while the columns would be the different attributes (pull(), select(), mutate(), transmute() and rename() work on them).
+# tidy data is based on the distinction between rows and columns where the different verbs let you work with each of this parts of the data frame. 
+
+# The stars objects are based on tbl_cube, which are an array data structure type of object (created by Hadley Wickam). This data structure can be manage by some verbs of the dplyr package. To differentiate which ones; is helpful to associate dimensions as rows (being possible to apply slice() and filter() based on this dimensions) while the columns would be the different attributes (pull(), select(), mutate(), transmute() and rename() work on them).
 
 
 # stars object ------------------------------------------------------------
@@ -40,7 +40,7 @@ x %>% slice(
 
 # This way, we slice out a single band out of the band dimension. The new dataset maintains the single attribute but decreases in terms of dimension.
 
-
+x6 %>% as.tbl_cube()
 
 # filter() ----------------------------------------------------------------
 
@@ -51,6 +51,7 @@ x %>% filter(x > 289000, x < 291000, band > 3) -> x7
 # the subarray is created based on the x coordinates (similar to masking) and the band value. If we put band == 3 this will not drop the band dimension (it will have an unique one).
 # Applying filter may have limitations on stars object with rectilinear, curvilinear or simple feature geometries, for such cases using regular [] selection or st_crop may be an alternative.
 
+x7 %>% as.tbl_cube()
 
 # pull() ------------------------------------------------------------------
 
@@ -69,7 +70,6 @@ x[[1]]
 
 # or
 x$L7_ETMs.tif
-
 
 # mutate() and transmute() ------------------------------------------------
 
